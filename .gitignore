@@ -11,7 +11,7 @@ crash.log
 # Exclude any .tfvars files that are intended to be kept private
 *.auto.tfvars
 *.auto.tfvars.json
-*.tfvars
+#*.tfvars
 *.tfvars.json
 
 # Exclude override files as they usually contain sensitive information
