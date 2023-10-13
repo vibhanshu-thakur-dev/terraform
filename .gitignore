@@ -1,0 +1,48 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude any .tfvars files that are intended to be kept private
+*.auto.tfvars
+*.auto.tfvars.json
+*.tfvars
+*.tfvars.json
+
+# Exclude override files as they usually contain sensitive information
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Exclude CLI configuration files
+.terraformrc
+terraform.rc
+
+# Exclude .terraform.lock.hcl file
+.terraform.lock.hcl
+
+# Exclude provider credentials files
+*.hcl
+
+# Exclude sensitive terraform variables file
+override.auto.tfvars
+
+# MacOS clutter
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Terraform CLI binary
+.terraform
+
+# If using Subversion for version control, exclude .terraform directories
+.svn
+
+# End of Terraform .gitignore
+
