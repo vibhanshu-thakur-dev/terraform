@@ -23,7 +23,7 @@ variable "private_subnet_cidr_list" {
 }
 
 variable "emailtag" {
-    type = string
-    default = "vibhanshu@quadcorps.co.uk"
-    description = "Email ID for resource tag"
+  type        = string
+  default     = "vibhanshu@quadcorps.co.uk"
+  description = "Email ID for resource tag"
 }
