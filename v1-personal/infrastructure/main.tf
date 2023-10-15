@@ -24,7 +24,7 @@ module "eks" {
 
 
   vpc_id     = var.vpc_id
-  subnet_ids = ["subnet-0d62c00fb697d5b5a", "subnet-0857ec09e610ccad1"]
+  subnet_ids = var.subnet_list
   #control_plane_subnet_ids = data.aws_vpc.main.intra_subnets
 
   # EKS Managed Node Group(s)
@@ -51,7 +51,7 @@ module "eks" {
         GithubOrg   = "terraform-aws-modules"
       }
 
-      
+     
 
       update_config = {
         max_unavailable_percentage = 33 # or set `max_unavailable`
