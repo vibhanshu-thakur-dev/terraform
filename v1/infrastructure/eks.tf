@@ -7,7 +7,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.17.2"
 
-  cluster_name                   = "vib-eks-cluster"
+  cluster_name                   = var.cluster_name
   cluster_endpoint_public_access = true
 
   cluster_addons = {
@@ -23,14 +23,14 @@ module "eks" {
   }
 
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_list
+  vpc_id     = data.aws_vpc.main.id
+  subnet_ids = [element(data.aws_subnets.private_subnets.ids, 0), element(data.aws_subnets.private_subnets.ids, 1)]
   #control_plane_subnet_ids = data.aws_vpc.main.intra_subnets
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
     ami_type       = "AL2_x86_64"
-    instance_types = ["t3.large"]
+    instance_types = ["t3a.large"]
 
     # EKS Managed Node Group(s)
     # attach_cluster_primary_security_group = true
@@ -51,17 +51,18 @@ module "eks" {
         GithubOrg   = "terraform-aws-modules"
       }
 
-     
+
 
       update_config = {
         max_unavailable_percentage = 33 # or set `max_unavailable`
       }
 
       tags = {
-        terraform = "true"
-        Name      = "vib-test-eks-cluster"
-        Email     = "${var.emailtag}"
-        Owner     = "${var.emailtag}"
+        terraform   = "true"
+        Name        = "vib-test-eks-cluster"
+        Environment = "${var.environment}"
+        Email       = "${var.emailtag}"
+        Owner       = "${var.emailtag}"
       }
     }
   }

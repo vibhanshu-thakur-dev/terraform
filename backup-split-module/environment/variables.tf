@@ -1,19 +1,7 @@
-variable "profile" {
-  type        = string
-  default     = "quadcorps"
-  description = "AWS Profile"
-}
-
 variable "region" {
   type        = string
   default     = "eu-west-2"
   description = "AWS deployment region"
-}
-
-variable "environment" {
-  type        = string
-  default     = "dev"
-  description = "environment"
 }
 
 variable "az_list" {
@@ -24,13 +12,13 @@ variable "az_list" {
 
 variable "public_subnet_cidr_list" {
   type        = list(string)
-  default     = ["10.0.1.0/20", "10.0.16.0/20"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
   description = "Public subnet CIDRs"
 }
 
 variable "private_subnet_cidr_list" {
   type        = list(string)
-  default     = ["10.0.32.0/20", "10.0.48.0/20", "10.0.64.0/20", "10.0.80.0/20"]
+  default     = ["10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   description = "Private subnet CIDRs"
 }
 

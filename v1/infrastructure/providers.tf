@@ -1,3 +1,4 @@
+
 terraform {
   required_version = ">= 1.0"
 
@@ -16,12 +17,25 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = var.region
+  region  = var.region
+  profile = var.profile
+
+  default_tags {
+    tags = {
+      terraform   = "true"
+      Email       = "${var.emailtag}"
+      Owner       = "${var.emailtag}"
+      Environment = "${var.environment}"
+    }
+  }
 }
 
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+  #config_path    = "~/.kube/config"
+  #config_context = "my-context"
 
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"

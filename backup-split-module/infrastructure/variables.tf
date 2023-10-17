@@ -14,19 +14,15 @@ variable "region" {
   default     = "eu-west-2"
   description = "AWS deployment region"
 }
-variable "profile" {
-  type        = string
-  default     = "vibhanshu-personal"
-  description = "AWS profile"
-}
+
 variable "az_list" {
   type        = list(string)
   default     = ["eu-west-2a", "eu-west-2b"]
   description = "EU West 2 availability zones"
 }
 
-variable "subnet_list" {
+variable "private_subnets" {
   type        = list(string)
-  default     = ["subnet-0f9455d8a8466ed74","subnet-015e6b9113991fe83"]
-  description = "List of private subnets"
+  default     = ["subnet-0a70411a1c75052f8", "subnet-0e03581827149d29b"]
+  description = "Subnets for eks"
 }

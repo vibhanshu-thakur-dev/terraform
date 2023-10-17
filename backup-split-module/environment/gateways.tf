@@ -11,7 +11,10 @@ resource "aws_internet_gateway" "i_gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "vib-test-vpc-internet-gateway"
+    terraform = "true"
+    Name      = "vib-test-vpc-internet-gateway"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }
 
@@ -25,7 +28,10 @@ resource "aws_eip" "eip" {
   domain     = "vpc"
 
   tags = {
-    Name = "vib-test-vpc-elastic-ip-${count.index + 1}"
+    terraform = "true"
+    Name      = "vib-test-vpc-elastic-ip-${count.index + 1}"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }
 
@@ -40,6 +46,9 @@ resource "aws_nat_gateway" "nat_gw" {
 
 
   tags = {
-    Name = "vib-test-vpc-nat-gateway-${count.index + 1}"
+    terraform = "true"
+    Name      = "vib-test-vpc-nat-gateway-${count.index + 1}"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }

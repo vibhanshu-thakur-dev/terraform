@@ -9,7 +9,10 @@ resource "aws_route_table" "public_subnet_route_table" {
   }
 
   tags = {
-    Name = "vib-test-vpc-public-subnet-route-table"
+    terraform = "true"
+    Name      = "vib-test-vpc-public-subnet-route-table"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }
 
@@ -33,7 +36,10 @@ resource "aws_route_table" "private_subnet_route_table" {
   }
 
   tags = {
-    Name = "vib-test-vpc-private-subnet-route-table-${count.index + 1}"
+    terraform = "true"
+    Name      = "vib-test-vpc-private-subnet-route-table-${count.index + 1}"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }
 

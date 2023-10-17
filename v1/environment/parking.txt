@@ -1,0 +1,45 @@
+resource "kind_cluster" "this" {
+  name = "flux-e2e"
+}
+
+resource "helm_release" "this" {
+  repository       = "https://fluxcd-community.github.io/helm-charts"
+  chart            = "flux2"
+  name             = "flux2"
+  namespace        = "flux-system"
+  create_namespace = true
+}
+
+resource "helm_release" "this" {
+  repository       = "https://fluxcd-community.github.io/helm-charts"
+  chart            = "flux2"
+  name             = "flux2"
+  namespace        = "flux-system"
+  create_namespace = true
+}
+
+provider "helm" {
+  kubernetes {
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      # This requires the awscli to be installed locally where Terraform is executed
+      args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+    }
+  }
+}
+
+provider "flux" {
+  kubernetes = {
+    host                   = var.cluster_endpoint
+    cluster_ca_certificate = base64decode(var.cluster_ca_cert)
+    exec = {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+      command     = "aws"
+    }
+  }
+  git = {
+    url = "https://github.com/vibhanshu-thakur-dev/k8-manifest/tree/main"
+  }
+}

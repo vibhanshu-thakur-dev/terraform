@@ -16,24 +16,6 @@ variable "environment" {
   description = "environment"
 }
 
-variable "az_list" {
-  type        = list(string)
-  default     = ["eu-west-2a", "eu-west-2b"]
-  description = "EU West 2 availability zones"
-}
-
-variable "public_subnet_cidr_list" {
-  type        = list(string)
-  default     = ["10.0.1.0/20", "10.0.16.0/20"]
-  description = "Public subnet CIDRs"
-}
-
-variable "private_subnet_cidr_list" {
-  type        = list(string)
-  default     = ["10.0.32.0/20", "10.0.48.0/20", "10.0.64.0/20", "10.0.80.0/20"]
-  description = "Private subnet CIDRs"
-}
-
 variable "emailtag" {
   type        = string
   default     = "vibhanshu@quadcorps.co.uk"
@@ -44,4 +26,17 @@ variable "cluster_name" {
   type        = string
   default     = "vib-eks-cluster"
   description = "EKS Cluster name"
+}
+
+variable "git_username" {
+  type        = string
+  default     = "vibhanshu-thakur-dev"
+  description = "Git username"
+}
+
+
+variable "git_password" {
+  type        = string
+  default     = ""
+  description = "Git password"
 }

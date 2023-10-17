@@ -5,6 +5,9 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "vibhanshu-test-vpc"
+    terraform = "true"
+    Name      = "vibhanshu-test-vpc"
+    Email     = "${var.emailtag}"
+    Owner     = "${var.emailtag}"
   }
 }
