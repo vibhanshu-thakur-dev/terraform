@@ -47,43 +47,26 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-
-  #config_path    = "~/.kube/config"
-  #config_context = "my-context"
-
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    command     = "aws"
-    # This requires the awscli to be installed locally where Terraform is executed
-    args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-  }
+  host                   = data.aws_eks_cluster.target.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.target.token
 }
 
 
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    cluster_ca_certificate = base64decode(element(data.aws_eks_cluster.cluster.certificate_authority,0).data)
-    exec {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
-      command     = "aws"
-    }
+    host                   = data.aws_eks_cluster.target.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.target.token
   }
 }
 
 provider "flux" {
   kubernetes = {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    cluster_ca_certificate = base64decode(element(data.aws_eks_cluster.cluster.certificate_authority,0).data)
-    exec = {
-      api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
-      command     = "aws"
-    }
+    host                   = data.aws_eks_cluster.target.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.target.token
   }
   git = {
     url = "https://github.com/vibhanshu-thakur-dev/k8-manifest.git"
