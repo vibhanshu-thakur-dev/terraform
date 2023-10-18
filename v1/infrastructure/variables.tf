@@ -16,10 +16,10 @@ variable "environment" {
   description = "environment"
 }
 
-variable "vpc_id" {
+variable "vpc_name" {
   type        = string
   default     = ""
-  description = "VPC ID"
+  description = "VPC Name"
 }
 
 variable "az_list" {

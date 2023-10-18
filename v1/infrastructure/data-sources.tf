@@ -1,13 +1,15 @@
 # Get AWS VPC details for EKS
 data "aws_vpc" "main" {
-  id = var.vpc_id
+  tags = {
+    Name = "${var.vpc_name}"
+  }
 }
 
 # Get VPC subnets for EKS
 data "aws_subnets" "private_subnets" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [data.aws_vpc.main.id]
   }
 
   tags = {
