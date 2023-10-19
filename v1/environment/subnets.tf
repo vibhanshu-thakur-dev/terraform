@@ -37,5 +37,6 @@ resource "aws_subnet" "private_subnets" {
     "kubernetes.io/role/internal-elb"       = 1
     "kubernetes.io/cluster/vib-eks-cluster" = "shared"
     Tier                                    = "Private"
+    AZGroup                                 = "${count.index < (length(var.private_subnet_cidr_list) / 2) ? "private-subnet-group" : "data-subnet-group"}"
   }
 }

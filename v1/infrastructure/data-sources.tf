@@ -13,6 +13,7 @@ data "aws_subnets" "private_subnets" {
   }
 
   tags = {
-    Tier = "Private"
+    Tier    = "Private"
+    AZGroup = "private-subnet-group"
   }
 }
