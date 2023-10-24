@@ -45,3 +45,12 @@ variable "cluster_name" {
   default     = "vib-eks-cluster"
   description = "EKS Cluster name"
 }
+
+variable "state_backup" {
+  type = object({
+    bucket_name   = string
+    db_table_name = string
+    key           = string
+  })
+  description = "Terraform state backup values"
+}

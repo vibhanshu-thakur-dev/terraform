@@ -2,6 +2,13 @@
 terraform {
   required_version = ">= 1.0"
 
+  backend "s3" {
+    bucket         = "quadcorps-dev-vt-tf-state"
+    key            = "local/macbook/deployments"
+    region         = "eu-west-2"
+    dynamodb_table = "quadcorps-dev-vt-tf-statelock"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -59,20 +66,5 @@ provider "helm" {
     host                   = data.aws_eks_cluster.target.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.target.token
-  }
-}
-
-provider "flux" {
-  kubernetes = {
-    host                   = data.aws_eks_cluster.target.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.target.token
-  }
-  git = {
-    url = "https://github.com/vibhanshu-thakur-dev/k8-manifest.git"
-    http = {
-      username = "${var.git_username}"
-      password = "${var.git_password}"
-    }
   }
 }

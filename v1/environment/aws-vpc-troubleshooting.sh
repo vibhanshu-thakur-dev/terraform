@@ -1,5 +1,5 @@
 #!/bin/bash
-vpc="vpc-04bdd849983ee1971"
+vpc="vpc-0b62a09f585ea23e4"
 region="eu-west-2"
 aws ec2 describe-internet-gateways --region $region --filters 'Name=attachment.vpc-id,Values='$vpc | grep InternetGatewayId
 aws ec2 describe-subnets --region $region --filters 'Name=vpc-id,Values='$vpc | grep SubnetId
