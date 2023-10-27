@@ -30,7 +30,7 @@ module "eks" {
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
     ami_type       = "AL2_x86_64"
-    instance_types = ["t3a.large"]
+    instance_types = [var.eks_config.instance_type]
 
     # EKS Managed Node Group(s)
     # attach_cluster_primary_security_group = true
@@ -39,14 +39,14 @@ module "eks" {
 
   eks_managed_node_groups = {
     vib_managed_node_group = {
-      min_size     = 2
-      max_size     = 2
-      desired_size = 2
+      min_size     = var.eks_config.node_min
+      max_size     = var.eks_config.node_max
+      desired_size = var.eks_config.node_desired
 
-      instance_types = ["t3.large"]
-      capacity_type  = "SPOT"
+      instance_types = [var.eks_config.instance_type]
+      capacity_type  = var.eks_config.capacity_type
       labels = {
-        Environment = "test"
+        Environment = var.environment
         GithubRepo  = "terraform-aws-eks"
         GithubOrg   = "terraform-aws-modules"
       }
@@ -59,7 +59,7 @@ module "eks" {
 
       tags = {
         terraform   = "true"
-        Name        = "vib-test-eks-cluster"
+        Name        = var.eks_config.cluster_name
         Environment = "${var.environment}"
         Email       = "${var.emailtag}"
         Owner       = "${var.emailtag}"

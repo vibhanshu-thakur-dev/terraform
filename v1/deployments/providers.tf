@@ -3,10 +3,9 @@ terraform {
   required_version = ">= 1.0"
 
   backend "s3" {
-    bucket         = "quadcorps-dev-vt-tf-state"
-    key            = "local/macbook/deployments"
-    region         = "eu-west-2"
-    dynamodb_table = "quadcorps-dev-vt-tf-statelock"
+    bucket = "quadcorps-dev-vt-tf-state"
+    key    = "terraform-aws-vpc-k8-kong/local/macbook/deployments"
+    region = "eu-west-2"
   }
 
   required_providers {
@@ -36,7 +35,6 @@ terraform {
     }
   }
 }
-
 
 # Configure the AWS Provider
 provider "aws" {

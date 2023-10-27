@@ -40,3 +40,13 @@ variable "git_password" {
   default     = ""
   description = "Git password"
 }
+
+variable "externaldns_config" {
+  type        = map(any)
+  description = "External DNS config"
+}
+
+variable "tags" {
+  type        = map(any)
+  description = "Tags for all resources"
+}

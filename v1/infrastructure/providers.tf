@@ -4,9 +4,8 @@ terraform {
 
   backend "s3" {
     bucket         = "quadcorps-dev-vt-tf-state"
-    key            = "local/macbook/infrastructure"
+    key            = "terraform-aws-vpc-k8-kong/local/macbook/infrastructure"
     region         = "eu-west-2"
-    dynamodb_table = "quadcorps-dev-vt-tf-statelock"
   }
 
   required_providers {

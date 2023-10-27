@@ -8,3 +8,10 @@ module "fluxcd" {
   git_password = var.git_password
   git_username = var.git_username
 }
+
+module "external-dns" {
+  source             = "./modules/external-dns"
+  cluster_name       = var.cluster_name
+  externaldns_config = var.externaldns_config
+  tags               = var.tags
+}

@@ -39,3 +39,8 @@ variable "cluster_name" {
   default     = "vib-eks-cluster"
   description = "EKS Cluster name"
 }
+
+variable "eks_config" {
+  type        = map(any)
+  description = "EKS config"
+}

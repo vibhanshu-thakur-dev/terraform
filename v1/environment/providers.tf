@@ -3,9 +3,8 @@ terraform {
 
   backend "s3" {
     bucket         = "quadcorps-dev-vt-tf-state"
-    key            = "local/macbook/environment"
+    key            = "terraform-aws-vpc-k8-kong/local/macbook/environment"
     region         = "eu-west-2"
-    dynamodb_table = "quadcorps-dev-vt-tf-statelock"
   }
 
   required_version = ">= 1.0"
@@ -22,6 +21,7 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region  = var.region
+  profile = var.profile
   
   default_tags {
     tags = {
