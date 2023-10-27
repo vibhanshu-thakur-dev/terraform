@@ -1,5 +1,6 @@
-
-# Networking
+###############################################################
+# NETWORKING
+###############################################################
 # After subnets, an internet gateway is needed for public subnet
 # to talk to the internet and for NAT gateway for private subnets.
 # An elastic IP is needed for the NAT gateway

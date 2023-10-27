@@ -1,4 +1,6 @@
-
+###############################################################
+# ROUTING TABLES FOR SUBNETS
+###############################################################
 # Route table for public subnets
 resource "aws_route_table" "public_subnet_route_table" {
   vpc_id = aws_vpc.main.id

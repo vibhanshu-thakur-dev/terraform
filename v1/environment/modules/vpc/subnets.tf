@@ -1,6 +1,6 @@
 #############
 # Create Subnets within the VPC.
-# A total of 3 subnets will be created
+# A total of 3 subnets will be created per AZ
 #   1. Public subnet
 #   2. Private subnet
 #   3. Private data subnet
