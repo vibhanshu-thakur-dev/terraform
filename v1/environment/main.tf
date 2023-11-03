@@ -9,5 +9,6 @@ module "vpc" {
 
     public_subnet_cidr_list = var.public_subnet_cidr_list
     private_subnet_cidr_list = var.private_subnet_cidr_list
+    vpc_name = var.vpc_name
 
 }

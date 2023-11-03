@@ -24,7 +24,7 @@ module "eks" {
 
 
   vpc_id     = data.aws_vpc.main.id
-  subnet_ids = [element(data.aws_subnets.private_subnets.ids, 0), element(data.aws_subnets.private_subnets.ids, 1)]
+  subnet_ids = data.aws_subnets.private_subnets.ids
   #control_plane_subnet_ids = data.aws_vpc.main.intra_subnets
 
   # EKS Managed Node Group(s)

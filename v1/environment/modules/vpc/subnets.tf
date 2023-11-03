@@ -17,7 +17,7 @@ resource "aws_subnet" "public_subnets" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                                    = "vib-test-vpc-public-subnet-${count.index + 1}"
+    Name                                    = "vib-test-vpc-public-subnet-${count.index + 1}-${element(var.az_list, count.index % 2)}"
     "kubernetes.io/role/elb"                = 1
     "kubernetes.io/cluster/vib-eks-cluster" = "shared"
     Tier                                    = "Public"
@@ -33,7 +33,7 @@ resource "aws_subnet" "private_subnets" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name                                    = "vib-test-vpc-private-subnet-${count.index + 1}"
+    Name                                    = "vib-test-vpc-private-subnet-${count.index + 1}-${element(var.az_list, count.index % 2)}"
     "kubernetes.io/role/internal-elb"       = 1
     "kubernetes.io/cluster/vib-eks-cluster" = "shared"
     Tier                                    = "Private"

@@ -50,3 +50,8 @@ variable "tags" {
   type        = map(any)
   description = "Tags for all resources"
 }
+
+variable "certmanager_config" {
+  type        = map(any)
+  description = "Cert Manager config"
+}

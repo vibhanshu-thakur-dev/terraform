@@ -8,6 +8,6 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "vibhanshu-test-vpc"
+    Name = "${var.vpc_name}"
   }
 }

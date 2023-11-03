@@ -10,6 +10,12 @@ variable "region" {
   description = "AWS deployment region"
 }
 
+variable "vpc_name" {
+  type        = string
+  default     = "vibhanshu-test-vpc"
+  description = "VPC Name"
+}
+
 variable "environment" {
   type        = string
   default     = "dev"
