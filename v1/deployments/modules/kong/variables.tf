@@ -1,6 +1,6 @@
-variable "externaldns_config" {
+variable "konggw_config" {
   type        = map(any)
-  description = "External DNS config"
+  description = "Kong GW config"
 }
 
 variable "tags" {

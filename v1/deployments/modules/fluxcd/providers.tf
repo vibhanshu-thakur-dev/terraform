@@ -16,9 +16,9 @@ terraform {
 
 provider "flux" {
   kubernetes = {
-    host                   = var.host 
-    cluster_ca_certificate = base64decode(var.cluster_ca_certificate )
-    token                  = var.token 
+    host                   = var.host
+    cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
+    token                  = var.token
   }
   git = {
     url = "https://github.com/vibhanshu-thakur-dev/k8-manifest.git"

@@ -2,9 +2,9 @@
 terraform {
 
   backend "s3" {
-    bucket         = "quadcorps-dev-vt-tf-state"
-    key            = "terraform-aws-vpc-k8-kong/local/macbook/environment"
-    region         = "eu-west-2"
+    bucket = "quadcorps-dev-vt-tf-state"
+    key    = "terraform-aws-vpc-k8-kong/local/macbook/environment"
+    region = "eu-west-2"
   }
 
   required_version = ">= 1.0"
@@ -22,7 +22,7 @@ terraform {
 provider "aws" {
   region  = var.region
   profile = var.profile
-  
+
   default_tags {
     tags = {
       terraform   = "true"

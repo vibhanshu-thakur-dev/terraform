@@ -55,3 +55,8 @@ variable "certmanager_config" {
   type        = map(any)
   description = "Cert Manager config"
 }
+
+variable "konggw_config" {
+  type        = map(any)
+  description = "Kong GW config"
+}

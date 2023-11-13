@@ -44,18 +44,18 @@ data "aws_iam_policy_document" "iam_service_account_assume_role" {
       "sts:AssumeRoleWithWebIdentity"
     ]
     principals {
-      type = "Federated"
+      type        = "Federated"
       identifiers = [data.aws_iam_openid_connect_provider.target.arn]
     }
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "${replace(data.aws_eks_cluster.target.identity[0].oidc[0].issuer, "https://", "")}:sub"
-      values = ["system:serviceaccount:${var.externaldns_config.namespace}:${var.externaldns_config.service_account_name}"]
+      values   = ["system:serviceaccount:${var.externaldns_config.namespace}:${var.externaldns_config.service_account_name}"]
     }
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "${replace(data.aws_eks_cluster.target.identity[0].oidc[0].issuer, "https://", "")}:aud"
-      values = ["sts.amazonaws.com"]
-    }    
+      values   = ["sts.amazonaws.com"]
+    }
   }
 }

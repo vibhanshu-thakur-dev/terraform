@@ -22,3 +22,10 @@ module "cert-manager" {
   certmanager_config = var.certmanager_config
   tags               = var.tags
 }
+
+module "konggw" {
+  source             = "./modules/kong"
+  cluster_name       = var.cluster_name
+  konggw_config = var.konggw_config
+  tags               = var.tags
+}
