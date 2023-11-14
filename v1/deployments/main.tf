@@ -24,8 +24,21 @@ module "cert-manager" {
 }
 
 module "konggw" {
-  source             = "./modules/kong"
-  cluster_name       = var.cluster_name
+  source        = "./modules/kong"
+  cluster_name  = var.cluster_name
   konggw_config = var.konggw_config
-  tags               = var.tags
+  tags          = var.tags
+}
+
+module "monitoring" {
+  source            = "./modules/kube-prometheus-stack"
+  cluster_name      = var.cluster_name
+  monitoring_config = var.monitoring_config
+  tags              = var.tags
+}
+
+module "nginx-ingress" {
+  source       = "./modules/nginx-ingress"
+  cluster_name = var.cluster_name
+  tags         = var.tags
 }

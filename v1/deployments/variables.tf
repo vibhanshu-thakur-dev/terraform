@@ -60,3 +60,8 @@ variable "konggw_config" {
   type        = map(any)
   description = "Kong GW config"
 }
+
+variable "monitoring_config" {
+  type        = map(any)
+  description = "Config for monitoring"
+}
