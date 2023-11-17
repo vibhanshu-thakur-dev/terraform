@@ -1,0 +1,15 @@
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: monitoring.eks.vt.dev.quaddemo.co.uk
+  namespace: monitoring
+spec:
+
+  secretName: monitoring.eks.vt.dev.quaddemo.co.uk
+  issuerRef:
+    name: letsencrypt-cert-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames:
+    - monitoring.eks.vt.dev.quaddemo.co.uk

@@ -1,3 +1,16 @@
+locals {
+  use_letsencrypt_dns = true
+  
+  module_values = {
+    serviceAccount = {
+      name = var.certmanager_config.service_account_name
+      annotations = !local.use_letsencrypt_dns ? {} : {
+        "eks.amazonaws.com/role-arn" = aws_iam_role.service_account_role.arn
+      }
+    }
+  }
+}
+
 resource "kubernetes_namespace" "target" {
   metadata {
     name = var.certmanager_config.namespace
@@ -9,15 +22,30 @@ resource "helm_release" "cert-manager" {
   namespace  = var.certmanager_config.namespace
   chart      = "cert-manager"
   repository = "https://charts.jetstack.io"
-  version    = "v1.5.3"
+  version    = "v1.13.2"
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
+  values = concat(
+    [yamlencode(yamldecode(file("${path.module}/helm-values/cert-manager-values.yaml")))],
+    [yamlencode(local.module_values)]
+  )
 
-  set {
-    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com\\/role-arn"
-    value = aws_iam_role.service_account_role.arn
-  }
+  depends_on = [ kubernetes_namespace.target]
+}
+
+
+
+
+
+resource "kubectl_manifest" "letsencrypt-cluster-issuer" {
+  for_each  = data.kubectl_file_documents.letsencrypt-cluster-issuer.manifests
+  yaml_body = each.value
+
+  depends_on = [ helm_release.cert-manager ]
+}
+
+resource "kubectl_manifest" "certificate" {
+  for_each  = data.kubectl_file_documents.certificate.manifests
+  yaml_body = each.value
+
+  depends_on = [ helm_release.cert-manager , kubectl_manifest.letsencrypt-cluster-issuer]
 }

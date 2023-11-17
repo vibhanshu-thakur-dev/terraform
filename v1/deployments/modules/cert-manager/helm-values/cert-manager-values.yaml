@@ -1,7 +1,5 @@
-global:
-  podSecurityPolicy:
-    enabled: true
-    useAppArmor: true
-prometheus:
-  enabled: false
 installCRDs: true
+
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: "${role_arn}"

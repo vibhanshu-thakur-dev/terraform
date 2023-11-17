@@ -1,13 +1,3 @@
-module "fluxcd" {
-  source                 = "./modules/fluxcd"
-  cluster_name           = var.cluster_name
-  token                  = data.aws_eks_cluster_auth.target.token
-  cluster_ca_certificate = data.aws_eks_cluster.target.certificate_authority[0].data
-  host                   = data.aws_eks_cluster.target.endpoint
-
-  git_password = var.git_password
-  git_username = var.git_username
-}
 
 module "external-dns" {
   source             = "./modules/external-dns"
@@ -28,6 +18,26 @@ module "konggw" {
   cluster_name  = var.cluster_name
   konggw_config = var.konggw_config
   tags          = var.tags
+
+}
+
+module "nginx_ingress" {
+  source       = "./modules/nginx-ingress"
+  cluster_name = var.cluster_name
+  tags         = var.tags
+}
+
+module "fluxcd" {
+  source                 = "./modules/fluxcd"
+  cluster_name           = var.cluster_name
+  token                  = data.aws_eks_cluster_auth.target.token
+  cluster_ca_certificate = data.aws_eks_cluster.target.certificate_authority[0].data
+  host                   = data.aws_eks_cluster.target.endpoint
+
+  git_password = var.git_password
+  git_username = var.git_username
+
+
 }
 
 module "monitoring" {
@@ -35,10 +45,10 @@ module "monitoring" {
   cluster_name      = var.cluster_name
   monitoring_config = var.monitoring_config
   tags              = var.tags
+
+  depends_on = [
+    module.nginx_ingress,
+    module.konggw
+  ]
 }
 
-module "nginx-ingress" {
-  source       = "./modules/nginx-ingress"
-  cluster_name = var.cluster_name
-  tags         = var.tags
-}

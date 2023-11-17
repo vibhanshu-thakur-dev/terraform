@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-cert-issuer
+spec:
+  acme:
+    email: vibhanshu@quadcorps.co.uk
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-cert-issuer
+    solvers:
+      - selector:
+          dnsZones: 
+            - kong.eks.vt.dev.quaddemo.co.uk
+            - monitoring.eks.vt.dev.quaddemo.co.uk
+        dns01:
+          route53:
+            region: eu-west-2
+            hostedZoneID: Z01950412AQ1SLPQP3SSO
+            role: arn:aws:iam::530769654820:role/vib-eks-cluster-cert-manager-role

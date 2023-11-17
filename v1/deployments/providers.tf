@@ -33,6 +33,11 @@ terraform {
       source  = "integrations/github"
       version = ">=5.18.0"
     }
+
+    kubectl = {
+      source  = "alekc/kubectl"
+      version = ">= 2.0.2"
+    }
   }
 }
 
@@ -57,7 +62,12 @@ provider "kubernetes" {
   token                  = data.aws_eks_cluster_auth.target.token
 }
 
-
+provider "kubectl" {
+  host                   = data.aws_eks_cluster.target.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.target.token
+  load_config_file       = false
+}
 
 provider "helm" {
   kubernetes {

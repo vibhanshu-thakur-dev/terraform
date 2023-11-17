@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "target" {
   }
 }
 
-resource "helm_release" "external_dns" {
+resource "helm_release" "monitoring_stack" {
   name       = "monitoring-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"

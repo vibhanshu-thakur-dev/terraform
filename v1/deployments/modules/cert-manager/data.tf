@@ -6,6 +6,14 @@ data "aws_eks_cluster" "target" {
   name = var.cluster_name
 }
 
+###############################################################################
+# Route53 Hosted Zone
+###############################################################################
+data "aws_route53_zone" "target" {
+  count = local.use_letsencrypt_dns ? 1 : 0
+  name  = var.certmanager_config.domain
+}
+
 ###############################################################
 # GET OPEN ID CONNECT PROVIDER URL
 ###############################################################
@@ -66,4 +74,17 @@ data "aws_iam_policy_document" "iam_service_account_assume_role" {
       values   = ["sts.amazonaws.com"]
     }
   }
+}
+
+
+###############################################################
+# K8 YAML
+###############################################################
+
+data "kubectl_file_documents" "letsencrypt-cluster-issuer" {
+  content = file("${path.module}/k8-manifests/cluster-issuer.yaml")
+}
+
+data "kubectl_file_documents" "certificate" {
+  content = file("${path.module}/k8-manifests/certificate.yaml")
 }
