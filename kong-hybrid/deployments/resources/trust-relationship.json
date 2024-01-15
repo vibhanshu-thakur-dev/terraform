@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::530769654820:oidc-provider/oidc.eks.eu-west-2.amazonaws.com/id/EB7C77BF3FA02484AA133FBB8106F2BA"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.eu-west-2.amazonaws.com/id/EB7C77BF3FA02484AA133FBB8106F2BA:aud": "sts.amazonaws.com",
+          "oidc.eks.eu-west-2.amazonaws.com/id/EB7C77BF3FA02484AA133FBB8106F2BA:sub": "system:serviceaccount:externaldns:external-dns"
+        }
+      }
+    }
+  ]
+}

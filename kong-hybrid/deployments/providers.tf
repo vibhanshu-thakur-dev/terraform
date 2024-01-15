@@ -4,7 +4,7 @@ terraform {
 
   backend "s3" {
     bucket  = "quadcorps-dev-vt-tf-state"
-    key     = "terraform-aws-vpc-k8-kong/local/macbook/deployments"
+    key     = "terraform-aws-vpc-k8-kong/kong-hybrid/local/macbook/deployments"
     region  = "eu-west-2"
     profile = "quadcorps-vt"
   }

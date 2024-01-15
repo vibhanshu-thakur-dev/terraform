@@ -4,7 +4,7 @@ terraform {
 
   backend "s3" {
     bucket = "quadcorps-dev-vt-tf-state"
-    key    = "terraform-aws-vpc-k8-kong/local/macbook/infrastructure"
+    key    = "terraform-aws-vpc-k8-kong/kong-hybrid/local/macbook/infrastructure"
     region = "eu-west-2"
     profile = "quadcorps-vt"
   }
@@ -37,17 +37,17 @@ provider "aws" {
   }
 }
 
-provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+#provider "kubernetes" {
+#  host                   = module.eks.cluster_endpoint
+#  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
 
   #config_path    = "~/.kube/config"
   #config_context = "my-context"
 
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    command     = "aws"
+#  exec {
+#    api_version = "client.authentication.k8s.io/v1beta1"
+#    command     = "aws"
     # This requires the awscli to be installed locally where Terraform is executed
-    args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-  }
-}
+#    args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+#  }
+#}

@@ -1,0 +1,10 @@
+controller:
+  service:
+    annotations: 
+      "service.beta.kubernetes.io/aws-load-balancer-type": "nlb"
+      "service.beta.kubernetes.io/aws-load-balancer-internal": "false"
+      "external-dns.alpha.kubernetes.io/hostname": "monitoring.eks.vt.dev.quaddemo.co.uk"
+      "external-dns.alpha.kubernetes.io/ttl": "60"
+    labels: {}
+
+  replicaCount: 2

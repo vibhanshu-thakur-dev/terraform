@@ -1,0 +1,33 @@
+## Override the deployment namespace
+##
+namespaceOverride: "monitoring"
+
+
+## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+##
+grafana:
+
+  adminPassword: UselessAdmin22
+
+  ingress:
+    ## If true, Grafana Ingress will be created
+    ##
+    enabled: true
+
+    ## IngressClassName for Grafana Ingress.
+    ## Should be provided if Ingress is enable.
+    ##
+    ingressClassName: nginx
+
+    
+    ## Path for grafana ingress
+    path: /
+
+    ## TLS configuration for grafana Ingress
+    ## Secret must be manually created in the namespace
+    ##
+    hosts:
+      - monitoring.eks.vt.dev.quaddemo.co.uk
+    # - secretName: grafana-general-tls
+    #   hosts:
+    #   - grafana.example.com

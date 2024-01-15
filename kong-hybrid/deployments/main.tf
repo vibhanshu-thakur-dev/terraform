@@ -1,10 +1,10 @@
 
-module "cluster-proportional-autoscaler" {
-  source                                 = "./modules/cluster-propotional-autoscaler"
-  cluster_name                           = var.cluster_name
-  cluster_proportional_autoscaler_config = var.cluster_proportional_autoscaler_config
-  tags                                   = var.tags
-}
+#module "cluster-proportional-autoscaler" {
+#  source                                 = "./modules/cluster-propotional-autoscaler"
+#  cluster_name                           = var.cluster_name
+#  cluster_proportional_autoscaler_config = var.cluster_proportional_autoscaler_config
+#  tags                                   = var.tags
+#}
 
 module "external-dns" {
   source             = "./modules/external-dns"
@@ -13,22 +13,22 @@ module "external-dns" {
   tags               = var.tags
 }
 
-module "cert-manager" {
-  source             = "./modules/cert-manager"
-  cluster_name       = var.cluster_name
-  certmanager_config = var.certmanager_config
-  tags               = var.tags
+#module "cert-manager" {
+#  source             = "./modules/cert-manager"
+#  cluster_name       = var.cluster_name
+#  certmanager_config = var.certmanager_config
+#  tags               = var.tags
 
   #depends_on = [module.monitoring]
-}
+#}
 
-module "konggw" {
-  source        = "./modules/kong"
-  cluster_name  = var.cluster_name
-  konggw_config = var.konggw_config
-  tags          = var.tags
+#module "konggw" {
+ # source        = "./modules/kong"
+ # cluster_name  = var.cluster_name
+ # konggw_config = var.konggw_config
+ # tags          = var.tags
 
-}
+#}
 
 #module "nginx_ingress" {
 #  source       = "./modules/nginx-ingress"
