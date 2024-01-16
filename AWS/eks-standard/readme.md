@@ -15,18 +15,18 @@ Before you begin, make sure you have the following prerequisites in place:
 ## Services Created
 
 - AWS VPC
--- With data, public and private subnets
--- Internet and Nat Gateways
+  - With data, public and private subnets
+  - Internet and Nat Gateways
 - EKS Cluster
-   -- With CNI plugin
+  - With CNI plugin
 - Services Deployment
-   -- Kube monitoring stack - Prometheus, Grafana etc
-   -- Metric server
-   -- Flux CD
-   -- External DNS
-   -- Cert manager
-   -- Cluster autoscaler
-   -- Nginx ingress for montoring stack
+  - Kube monitoring stack - Prometheus, Grafana etc
+  - Metric server
+  - Flux CD
+  - External DNS
+  - Cert manager
+  - Cluster autoscaler
+  - Nginx ingress for montoring stack
 
 ## Usage
 
