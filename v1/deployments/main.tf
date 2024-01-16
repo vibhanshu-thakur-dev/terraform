@@ -1,9 +1,15 @@
 
 module "cluster-proportional-autoscaler" {
-  source                                 = "./modules/cluster-propotional-autoscaler"
-  cluster_name                           = var.cluster_name
-  cluster_proportional_autoscaler_config = var.cluster_proportional_autoscaler_config
-  tags                                   = var.tags
+ source                                 = "./modules/cluster-propotional-autoscaler"
+ cluster_name                           = var.cluster_name
+ cluster_proportional_autoscaler_config = var.cluster_proportional_autoscaler_config
+ tags                                   = var.tags
+}
+
+module "metrics_server" {
+  source       = "./modules/metrics-server"
+  cluster_name = var.cluster_name
+  tags         = var.tags
 }
 
 module "external-dns" {
@@ -19,7 +25,7 @@ module "cert-manager" {
   certmanager_config = var.certmanager_config
   tags               = var.tags
 
-  #depends_on = [module.monitoring]
+  depends_on = [module.external-dns]
 }
 
 module "konggw" {
@@ -28,13 +34,20 @@ module "konggw" {
   konggw_config = var.konggw_config
   tags          = var.tags
 
+  depends_on = [
+    module.cert-manager,
+    module.monitoring,
+    module.external-dns,
+    module.nginx_ingress,
+    module.fluxcd
+  ]
 }
 
-#module "nginx_ingress" {
-#  source       = "./modules/nginx-ingress"
-#  cluster_name = var.cluster_name
-#  tags         = var.tags
-#}
+module "nginx_ingress" {
+  source       = "./modules/nginx-ingress"
+  cluster_name = var.cluster_name
+  tags         = var.tags
+}
 
 module "fluxcd" {
   source                 = "./modules/fluxcd"
@@ -49,15 +62,15 @@ module "fluxcd" {
 
 }
 
-#module "monitoring" {
-#  source            = "./modules/kube-prometheus-stack"
-#  cluster_name      = var.cluster_name
-#  monitoring_config = var.monitoring_config
-#  tags              = var.tags
+module "monitoring" {
+  source            = "./modules/kube-prometheus-stack"
+  cluster_name      = var.cluster_name
+  monitoring_config = var.monitoring_config
+  tags              = var.tags
 
-#  depends_on = [
-#    module.nginx_ingress,
-#    module.konggw
-#  ]
-#}
+  depends_on = [
+    module.nginx_ingress,
+    module.cert-manager
+  ]
+}
 

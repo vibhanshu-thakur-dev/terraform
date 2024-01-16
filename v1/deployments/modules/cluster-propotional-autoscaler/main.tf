@@ -21,7 +21,7 @@ resource "helm_release" "cluster_proportional_autoscaler" {
     value = aws_iam_role.service_account_role.arn
   }
 
- 
+
 
   set {
     name  = "autoDiscovery.clusterName"
@@ -37,8 +37,8 @@ resource "helm_release" "cluster_proportional_autoscaler" {
     name  = "rbac.serviceAccount.name"
     value = var.cluster_proportional_autoscaler_config.service_account_name
   }
-
-  set {
+  
+ set {
     name  = "rbac.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = aws_iam_role.service_account_role.arn
   }

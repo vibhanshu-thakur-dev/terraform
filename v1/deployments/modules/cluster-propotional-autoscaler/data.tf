@@ -21,24 +21,24 @@ data "aws_iam_policy_document" "iam_service_account_policy" {
   statement {
     effect = "Allow"
     actions = [
-        "autoscaling:DescribeAutoScalingGroups",
-        "autoscaling:DescribeAutoScalingInstances",
-        "autoscaling:DescribeLaunchConfigurations",
-        "autoscaling:DescribeScalingActivities",
-        "autoscaling:DescribeTags",
-        "ec2:DescribeInstanceTypes",
-        "ec2:DescribeLaunchTemplateVersions"
+      "autoscaling:DescribeAutoScalingGroups",
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeLaunchConfigurations",
+      "autoscaling:DescribeScalingActivities",
+      "autoscaling:DescribeTags",
+      "ec2:DescribeInstanceTypes",
+      "ec2:DescribeLaunchTemplateVersions"
     ]
     resources = ["*"]
   }
   statement {
     effect = "Allow"
     actions = [
-        "autoscaling:SetDesiredCapacity",
-        "autoscaling:TerminateInstanceInAutoScalingGroup",
-        "ec2:DescribeImages",
-        "ec2:GetInstanceTypesFromInstanceRequirements",
-        "eks:DescribeNodegroup"
+      "autoscaling:SetDesiredCapacity",
+      "autoscaling:TerminateInstanceInAutoScalingGroup",
+      "ec2:DescribeImages",
+      "ec2:GetInstanceTypesFromInstanceRequirements",
+      "eks:DescribeNodegroup"
     ]
     resources = ["*"]
   }

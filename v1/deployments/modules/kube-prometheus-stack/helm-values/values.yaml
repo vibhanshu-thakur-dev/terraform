@@ -19,7 +19,8 @@ grafana:
     ##
     ingressClassName: nginx
 
-    
+    annotations:
+      "cert-manager.io/cluster-issuer": "letsencrypt-cert-issuer"
     ## Path for grafana ingress
     path: /
 
@@ -28,6 +29,14 @@ grafana:
     ##
     hosts:
       - monitoring.eks.vt.dev.quaddemo.co.uk
+    #   hosts:
+    #   - grafana.example.com
+    tls:
+      - hosts:
+        - monitoring.eks.vt.dev.quaddemo.co.uk
+        secretName: monitoring.eks.vt.dev.quaddemo.co.uk-certificate-secret
+    #     hosts: 
+    #       - monitoring.eks.vt.dev.quaddemo.co.uk
     # - secretName: grafana-general-tls
     #   hosts:
     #   - grafana.example.com

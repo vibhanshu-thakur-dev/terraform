@@ -13,9 +13,9 @@ spec:
           dnsZones: 
             - kong.eks.vt.dev.quaddemo.co.uk
             - monitoring.eks.vt.dev.quaddemo.co.uk
-#        http01:
-#          ingress:
-#            ingressClassName: nginx
+        # http01:
+        #   ingress:
+        #     ingressClassName: nginx
         dns01:
           route53:
             region: eu-west-2
