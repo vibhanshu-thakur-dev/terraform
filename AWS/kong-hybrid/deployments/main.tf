@@ -6,21 +6,21 @@
 #  tags                                   = var.tags
 #}
 
-module "external-dns" {
-  source             = "./modules/external-dns"
-  cluster_name       = var.cluster_name
-  externaldns_config = var.externaldns_config
-  tags               = var.tags
+# module "external-dns" {
+#   source             = "./modules/external-dns"
+#   cluster_name       = var.cluster_name
+#   externaldns_config = var.externaldns_config
+#   tags               = var.tags
+# }
+
+module "cert-manager" {
+ source             = "./modules/cert-manager"
+ cluster_name       = var.cluster_name
+ certmanager_config = var.certmanager_config
+ tags               = var.tags
+
+  
 }
-
-#module "cert-manager" {
-#  source             = "./modules/cert-manager"
-#  cluster_name       = var.cluster_name
-#  certmanager_config = var.certmanager_config
-#  tags               = var.tags
-
-  #depends_on = [module.monitoring]
-#}
 
 #module "konggw" {
  # source        = "./modules/kong"
